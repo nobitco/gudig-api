@@ -1,19 +1,18 @@
 'use strict'
 
 import test from 'ava'
-import micro, { send } from 'micro'
+import micro from 'micro'
 import listen from 'test-listen'
 import request from 'request-promise'
+import users from '../users'
 
 test('GET /:id', async t => {
   let id = '99887651212'
 
-  let srv = micro(async (req, res) => {
-    send(res, 200, { id })
-  })
+  let srv = micro(users)
 
   let url = await listen(srv)
-  let body = await request({ uri: url, json: true })
+  let body = await request({ uri: `${url}/${id}`, json: true })
 
   t.deepEqual(body, { id })
 })
