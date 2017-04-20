@@ -18,4 +18,8 @@ export default class Db {
   getUser () {
     return Promise.resolve(fixtures.getUser())
   }
+
+  authenticate () {
+    return Promise.resolve(true)
+  }
 }
