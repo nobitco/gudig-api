@@ -15,10 +15,6 @@ if (env === 'test') {
 
 const hash = HttpHash()
 
-hash.set('GET /:id', async function getPicture (req, res, params) {
-  send(res, 200, params)
-})
-
 hash.set('POST /', async function saveUser (req, res, params) {
   let user = await json(req)
   await db.connect()
@@ -29,6 +25,18 @@ hash.set('POST /', async function saveUser (req, res, params) {
   delete created.password
 
   send(res, 201, created)
+})
+
+hash.set('GET /:username', async function getUser (req, res, params) {
+  let username = params.username
+
+  await db.connect()
+  let user = await db.getUser(username)
+
+  delete user.email
+  delete user.password
+
+  send(res, 200, user)
 })
 
 export default async function main (req, res) {
