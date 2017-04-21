@@ -1,4 +1,4 @@
 export default {
   db: {},
-  secret: process.env.PLATZIGRAM_SECRET || 'gudig4' // no usar defaults
+  secret: process.env.GUDIG_SECRET || 'gudig4' // no usar defaults
 }
